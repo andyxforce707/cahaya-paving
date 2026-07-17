@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CP | Cahaya Paving</title>
+    <!-- Alpine JS  -->
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Type js -->
+    <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
+
+    <!-- Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet" />
+
+    <style>
+      * {
+        font-family: 'Google Sans', sans-serif;
+      }
+    </style>
+  </head>
+  <body x-data="Products" class="w-full min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <div class="px-5 py-3 navbar w-full flex items-center justify-between gap-2 bg-linear-to-r from-emerald-500 via-emerald-400 to-emerald-600 shadow-sm lg:px-20 xl:px-35">
+      <h1 class="text-2xl flex gap-2 font-bold text-white items-center">
+        <!-- <img src="icons/layout-fluid.png" class="size-6 -rotate-45" /> -->
+        <div class="flex items-center justify-center overflow-hidden">
+          <img src="icons/dice-d6.png" class="size-10" />
+        </div>
+        CP
+      </h1>
+
+      <ul class="flex gap-3 text-sm text-slate-100">
+        <!-- <li><a href="#" class="transition hover:text-red-300">Beranda</a></li>
+        <li><a href="#" class="transition hover:text-red-300">Proyek</a></li>
+        <li><a href="#" class="transition hover:text-red-300">Hubungi Kami</a></li> -->
+      </ul>
+    </div>
+
+    <!-- Main Image -->
+    <div class="main_image px-5 py-5 flex justify-between items-center h-50 bg-linear-to-r from-slate-200 via-slate-100 to-gray-100 xl:h-90 lg:px-20 xl:px-35 overflow-hidden">
+      <div class="flex left flex-col" data-aos="fade-down">
+        <h2 id="type" class="font-lighter text-slate-500 text-xl lg:text-2xl xl:text-5xl" data-aos="fade-right"></h2>
+        <p id="type_4" class="text-sm text-slate-500 md:text-md"></p>
+        <span class="ms-2 text-xs text-emerald-600">est. 2026</span>
+
+        <span id="type_2" class="mt-10 italic text-slate-500 text-[11px] md:text-sm"></span>
+        <span class="italic text-slate-500 text-[11px] md:text-sm">Siap melayani pengiriman <span class="text-emerald-500 font-bold"> se-Jateng</span> dan <span class="text-emerald-500 font-bold">DIY.</span></span>
+      </div>
+
+      <div class="flex right flex-col self-start gap-1 sm:self-center items-center justify-center relative">
+        <img src="icons/dice-d6.png" class="size-20 sm:size-25 sm:size-35 md:size-45 xl:size-60 flex invert" data-aos="fade-left" />
+
+        <span id="type_3" class="text-black font-bold text-sm absolute mt-5 translate-y-[225%] sm:text-md sm:translate-y-[400%] md:text-white sm:mt-13"></span>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="projects relative px-3 w-full flex flex-col gap-2 bg-slate-50 pt-3 pb-19 overflow-hidden lg:px-35">
+      <h1 class="text-xl text-emerald-500 font-semibold text-center mt-2">Produk Kami</h1>
+
+      <div class="project_list grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 mt-7 md:gap-4">
+        <template x-for="(product,index) in products">
+          <div
+            class="project_card rounded-md relative z-2 p-1.5 flex flex-col bg-white shadow-md transition hover:bg-linear-to-t hover:from-emerald-100 hover:via-emerald-50 hover:to-white hover:border-b-2 border-b-white border-b-2 hover:border-b-emerald-400 group overflow-hidden group"
+            :key="product.id"
+            :data-aos="index % 2 == 0 ? 'fade-right':'fade-left'"
+          >
+            <img :src="'products/'+product.image" class="h-50 group-hover:scale-110 group-hover:-rotate-5 group-hover:-translate-y-5 group-hover:translate-x-5 transition relative z-2 rounded-sm" />
+            <p
+              class="relative text-[12px] font-semibold z-2 text-center text-emerald-400 my-3 group-hover:text-emerald-500 group-hover:bg-linear-to-r group-hover:from-transparent group-hover:via-white group-hover:to-transparent"
+              x-text="product.name"
+            ></p>
+            <button @click="getProductDetail(product.id)" class="relative rounded-md z-2 p-1 bg-emerald-500 flex items-center justify-center gap-2 text-sm transition hover:bg-emerald-600 text-white text-sm cursor-pointer">
+              <img src="icons/eye.png" class="size-3" />
+              Lihat
+            </button>
+
+            <img
+              src="icons/dice-d6.png"
+              class="opacity-0 brightness-90 size-30 absolute top-0 right-0 -translate-y-[100%] translate-x-[100%] z-1 transition group-hover:opacity-100 transition group-hover:-translate-y-[25%] group-hover:translate-x-[25%]"
+            />
+            <img
+              src="icons/dice-d6.png"
+              class="opacity-0 brightness-80 size-30 absolute bottom-0 left-0 translate-y-[100%] -translate-x-[100%] z-1 transition group-hover:opacity-100 transition group-hover:translate-y-[30%] group-hover:-translate-x-[50%] group-hover:size-50"
+            />
+          </div>
+        </template>
+      </div>
+
+      <img src="icons/dice-d6.png" class="hidden size-70 z-1 absolute bottom-0 right-0 translate-y-[25%] translate-x-[25%] brightness-70 sm:flex" />
+      <img src="icons/dice-d6.png" class="hidden size-60 z-1 absolute top-0 left-0 -translate-y-[25%] -translate-x-[25%] brightness-70 sm:flex" />
+    </div>
+
+    <!-- Projects -->
+    <!-- <div class="projects px-35 w-full flex flex-col gap-2 bg-slate-50 pt-3 pb-17">
+      <h1 class="text-xl text-rose-400 font-semibold text-center">Proyek Kami</h1>
+
+      <div class="project_list grid grid-cols-4 mt-7 gap-3">
+        <template x-for="project in projects">
+          <div class="project_card p-1.5 flex flex-col bg-white shadow-md" key="project.id">
+            <div class="bg-emerald-200 h-50 bg-linear-to-b from-blue-300 to-slate-700"></div>
+            <p class="font-semibold text-center text-red-400 my-3" x-text="project.name"></p>
+            <button class="p-1 bg-red-500 transition hover:bg-red-600 text-white text-sm cursor-pointer">Lihat</button>
+          </div>
+        </template>
+      </div>
+    </div> -->
+
+    <!-- Footer -->
+    <footer class="footer px-5 pt-6 pb-12 w-full flex gap-2 justify-between bg-linear-to-r from-emerald-700 to-emerald-400 md:px-35">
+      <h1 class="text-sm font-bold text-slate-200 md:text-lg"><span class="text-gray-200">C</span>ahaya <span class="text-gray-200">P</span>aving</h1>
+
+      <div class="flex flex-col">
+        <h3 class="text-sm font-bold text-gray-700 text-center md:text-start">Hubungi kami.</h3>
+        <nav class="flex gap-2 text-slate-100">
+          <a href="#" class="text-xs transition hover:underline hover:text-slate-200 cursor-pointer">instagram</a>
+          <a href="#" class="text-xs transition hover:underline hover:text-slate-200 cursor-pointer">facebook</a>
+          <a href="https://wa.me/6285701111799?text=Hai, mau tanya info pavingnya nih!" class="text-xs transition hover:underline hover:text-slate-200 cursor-pointer">whatsapp</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Absolute element -->
+    <div class="fixed right-10 bottom-10 z-3">
+      <a href="https://wa.me/6285701111799?text=Hai, mau tanya info pavingnya nih!" title="Kirimkan pesan atau tanya-tanya langsung.">
+        <img src="icons/whatsapp.png" class="size-10 transition hover:brightness-110 animate-bounce" />
+      </a>
+    </div>
+
+    <div x-transition x-cloak x-show="show_product_detail" class="modal rounded-md px-3 fixed z-3 inset-0 bg-[rgba(0,0,0,0.15)] backdrop-blur-sm flex flex-col justify-center items-center lg:px-40">
+      <template x-if="data_product_detail.length >= 1">
+        <div @click.outside="show_product_detail = false" class="modal_content relative overflow-hidden pb-3 w-5/6 bg-white rounded-sm shadow-sm lg:w-3/4 lg:pb-0">
+          <div class="flex justify-between items-center border-b border-b-slate-300 py-2 px-4">
+            <h3 class="text-slate-500 text-2xl font-semibold">Info</h3>
+            <img @click="show_product_detail = false" src="icons/cross-small.png" class="size-5 cursor-pointer brightness-50 transition hover:brightness-40" />
+          </div>
+
+          <div class="flex flex-col gap-4 py-2 px-5 md:flex-row sm:items-center md:items-start">
+            <img :src="'products/'+data_product_detail[0].image" class="size-60 rounded-sm" />
+            <div class="flex flex-col detail_info text-md relative z-2">
+              <p class="text-md text-slate-400">
+                <span x-text="data_product_detail[0].kode.toUpperCase()"></span> -
+                <span x-text="data_product_detail[0].name"></span>
+
+                <template x-if="data_product_detail[0].mutu != '-'">
+                  <span x-text="' - ' + data_product_detail[0].mutu.toUpperCase()"></span>
+                </template>
+              </p>
+              <p class="text-md text-slate-400">
+                <template x-if="data_product_detail[0].measure != 'pcs'">
+                  <div class="flex gap-2">
+                    <p x-text="data_product_detail[0].set"></p>
+                    <p>pcs (m2)</p>
+                  </div>
+                </template>
+              </p>
+              <p class="text-md text-slate-400" x-text="data_product_detail[0].dimension"></p>
+              <p class="text-md text-slate-400 italic text-sm mt-2" x-text="'`'+data_product_detail[0].desc+'`'"></p>
+            </div>
+          </div>
+
+          <div class="btns flex justify-end m-2">
+            <a
+              :href="'https://wa.me/6285701111799?text=Hai, aku mau beli '+ data_product_detail[0].name +' ya!\n\nKebutuhan: ___ (m2/pcs)\nAlamat pengiriman: ___\nUntuk: ___\nTerima kasih.'"
+              title="Beli atau tanya-tanya langsung."
+              class="relative z-2 rounded-md bg-emerald-500 transition hover:bg-emerald-600 cursor-pointer text-white px-2 py-1 flex self-end"
+              >Beli</a
+            >
+          </div>
+          <img src="icons/dice-d6.png" class="size-60 hidden z-1 absolute brightness-90 bottom-0 right-0 translate-y-[25%] translate-x-[25%] sm:flex" />
+        </div>
+      </template>
+    </div>
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('Products', () => ({
+          show_product_detail: false,
+          data_product_detail: [],
+
+          init() {
+            // type js
+            new Typed('#type', {
+              strings: ['<span class="text-emerald-500">C</span>ahaya <span class="text-emerald-500">P</span>aving'],
+              typeSpeed: 100,
+              showCursor: false,
+            });
+            new Typed('#type_2', {
+              strings: ['Melayani sepenuh hati.'],
+              typeSpeed: 50,
+              showCursor: false,
+            });
+
+            new Typed('#type_3', {
+              strings: ['CAHAYA'],
+              typeSpeed: 30,
+              showCursor: false,
+            });
+
+            new Typed('#type_4', {
+              strings: ['Harga miring, kualitas bersaing.'],
+              typeSpeed: 30,
+              showCursor: false,
+            });
+          },
+
+          // products: [
+          //   {
+          //     id: 1,
+          //     kode: '3d',
+          //     name: '3D - Belah Ketupat',
+          //     image: '3d.jpg',
+          //     mutu: 'k300',
+          //     measure: 'm2',
+          //     set: 30,
+          //     dimension: '-',
+          //     desc: 'Paving estetik berbentuk 3d seperti ilusi optik.',
+          //   },
+          //   {
+          //     id: 2,
+          //     kode: '3d',
+          //     name: 'Buis Beton - Panjang',
+          //     image: 'b_2.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: 1,
+          //     dimension: '-',
+          //     desc: 'Buis Beton yg sangat bermanfaat untuk kebutuhan proyek anda.',
+          //   },
+          //   {
+          //     id: 3,
+          //     kode: 'cs',
+          //     name: 'Car Stopper',
+          //     image: 'cs.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: 1,
+          //     dimension: '-',
+          //     desc: 'Butuh penghalang untuk parkiran mobil? Ini solusi nya.',
+          //   },
+          //   {
+          //     id: 4,
+          //     kode: 'diffable',
+          //     name: 'Guilding Block',
+          //     image: 'diffable.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: 1,
+          //     dimension: '30x30x3cm',
+          //     desc: 'Mampu memberikan petunjuk bagi penyandang disabilitas.',
+          //   },
+          //   {
+          //     id: 5,
+          //     kode: 'grb',
+          //     name: 'Grassblock',
+          //     image: 'grb.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: 1,
+          //     dimension: '40x30x8cm',
+          //     desc: 'Pengen yg beton-beton tapi yg masih seperti alam? Ini solusinya',
+          //   },
+          //   {
+          //     id: 6,
+          //     kode: 'h',
+          //     name: 'Holland 6 cm / 8 cm',
+          //     image: 'h.jpg',
+          //     mutu: '-',
+          //     measure: 'm2',
+          //     set: 45,
+          //     dimension: '21x10.5x6/8cm',
+          //     desc: 'Seperti bata yg mampu memberikan efek kesegaran seni ketika dipandang.',
+          //   },
+          //   {
+          //     id: 7,
+          //     kode: 'kb',
+          //     name: 'Kubus Besar 6 cm / 8 cm',
+          //     image: 'kb.jpg',
+          //     mutu: '-',
+          //     measure: 'm2',
+          //     set: 22,
+          //     dimension: '21x21x6/8cm',
+          //     desc: 'Seperti bata yg berukuran 2x  lipat yg mampu memberikan efek kesegaran seni ketika dipandang.',
+          //   },
+          //   {
+          //     id: 8,
+          //     kode: 'kbsr',
+          //     name: 'Kanstin Besar',
+          //     image: 'kbsr.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: 1,
+          //     dimension: '-',
+          //     desc: 'Mampu memberikan pembatas untuk pinggiran yg estetik.',
+          //   },
+          //   {
+          //     id: 9,
+          //     kode: 'kc',
+          //     name: 'Kubus Kecil',
+          //     image: 'kc.jpg',
+          //     mutu: '-',
+          //     measure: 'm2',
+          //     set: 90,
+          //     dimension: '10.5x10.5x6/8cm',
+          //     desc: 'Berukuran setengah dari holland, mampu memberikan relief yg sangat estetik.',
+          //   },
+          //   {
+          //     id: 10,
+          //     kode: 'kl',
+          //     name: 'Kanstin Lock',
+          //     image: 'kl.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: 1,
+          //     dimension: '40x20x10cm',
+          //     desc: 'Mampu memberikan pembatas yg saling mengunci.',
+          //   },
+          //   {
+          //     id: 11,
+          //     kode: 'kl',
+          //     name: 'Kanstin Taman',
+          //     image: 'kt.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: 1,
+          //     dimension: '40x30x15cm',
+          //     desc: 'Mampu memberikan pembatas yg estetik.',
+          //   },
+          //   {
+          //     id: 12,
+          //     kode: 's',
+          //     name: 'Segienam 6 cm / 8 cm',
+          //     image: 's.jpg',
+          //     mutu: '-',
+          //     measure: 'm2',
+          //     set: 28,
+          //     dimension: '-',
+          //     desc: 'Susunan paving yang seperti sarang lebah.',
+          //   },
+          //   {
+          //     id: 13,
+          //     kode: 'trihex',
+          //     name: 'Triple Segienam 6 cm / 8 cm',
+          //     image: 'trihex.jpg',
+          //     mutu: '-',
+          //     measure: 'm2',
+          //     set: '-',
+          //     dimension: '-',
+          //     desc: 'Susunan paving yang seperti rumah lebah yg tergabung dari 3 bagian menjadi satu.',
+          //   },
+          //   {
+          //     id: 14,
+          //     kode: 'u',
+          //     name: 'Uskup kecil 6 cm / 8 cm',
+          //     image: 'u.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: '-',
+          //     dimension: '-',
+          //     desc: 'Sebagai kuncian paving untuk pemasangan sirip ikan.',
+          //   },
+          //   {
+          //     id: 15,
+          //     kode: 'u',
+          //     name: 'Uskup besar 6 cm / 8 cm',
+          //     image: 'u_2.jpg',
+          //     mutu: '-',
+          //     measure: 'pcs',
+          //     set: '-',
+          //     dimension: '-',
+          //     desc: 'Sebagai kuncian paving untuk pemasangan sirip ikan.',
+          //   },
+          //   {
+          //     id: 16,
+          //     kode: 'unipave',
+          //     name: 'Paving Cacing 6 cm / 8 cm',
+          //     image: 'unipave.jpg',
+          //     mutu: '-',
+          //     measure: 'm2',
+          //     set: '45',
+          //     dimension: '-',
+          //     desc: 'Paving yg bermodel lekuk.',
+          //   },
+          // ],
+
+          products: [
+            {
+              id: 0,
+              kode: 'a13',
+              name: 'Holland 6 cm',
+              image: 'a11.png',
+              mutu: 'k300',
+              measure: 'm2',
+              set: 45,
+              dimension: '21x10.5x6cm',
+              desc: 'Paving estetik berbentuk persegi panjang.',
+            },
+            {
+              id: 1,
+              kode: 'e13',
+              name: 'Corso 6 cm',
+              image: 'e13.png',
+              mutu: 'k300',
+              measure: 'm2',
+              set: 22,
+              dimension: '21x21x6cm',
+              desc: 'Paving estetik berbentuk persegi.',
+            },
+            {
+              id: 2,
+              kode: 'a23',
+              name: 'Holland 8 cm',
+              image: 'a11.png',
+              mutu: 'k300',
+              measure: 'm2',
+              set: 45,
+              dimension: '21x10.5x6cm',
+              desc: 'Paving estetik berbentuk persegi panjang.',
+            },
+            {
+              id: 3,
+              kode: 'f13',
+              name: 'Segienam 6 cm',
+              image: 'f13.png',
+              mutu: 'k300',
+              measure: 'm2',
+              set: 28,
+              dimension: '-',
+              desc: 'Paving estetik berbentuk segienam seperti sarang lebah.',
+            },
+            {
+              id: 3,
+              kode: 'batako',
+              name: 'Batako',
+              image: 'batako.png',
+              mutu: '-',
+              measure: 'pcs',
+              set: 1,
+              dimension: '-',
+              desc: 'Batako yg mampu membuat bangunan rumah anda kokoh dan kuat.',
+            },
+            {
+              id: 4,
+              kode: 'diffable',
+              name: 'Diffable',
+              image: 'diffable.png',
+              mutu: '-',
+              measure: 'pcs',
+              set: 1,
+              dimension: '30x30x3cm',
+              desc: 'Penuntun untuk yg menyandang kebutuhan khusus terkati penglihatan',
+            },
+            {
+              id: 5,
+              kode: 'gb_mkl',
+              name: 'Grassblock 8 cm',
+              image: 'gb.png',
+              mutu: '-',
+              measure: 'm2',
+              set: 7.5,
+              dimension: '40x30x8cm',
+              desc: 'Rumput pun senang dengan lubang-lubangnya',
+            },
+            {
+              id: 6,
+              kode: 'porous',
+              name: 'Porous 6 cm',
+              image: 'porous.png',
+              mutu: '-',
+              measure: 'm2',
+              set: 45,
+              dimension: '21x10.5x6cm',
+              desc: 'Pori-pori penyerap air yg sangat bagus',
+            },
+            {
+              id: 7,
+              kode: 'jt',
+              name: 'Kanstin Taman',
+              image: 'jt.png',
+              mutu: '-',
+              measure: 'pcs',
+              set: 1,
+              dimension: '40x30x15cm',
+              desc: 'Pembatas yg estetik',
+            },
+            {
+              id: 8,
+              kode: 'b13',
+              name: 'Kawung set',
+              image: 'b13.png',
+              mutu: 'k300',
+              measure: 'm2',
+              set: '-',
+              dimension: '-',
+              desc: 'Keindahan yg didambakan',
+            },
+            {
+              id: 9,
+              kode: 'c13',
+              name: 'Kubus Kecil 6 cm',
+              image: 'c13.png',
+              mutu: 'k300',
+              measure: 'm2',
+              set: 45,
+              dimension: '10.5x10.5x6cm',
+              desc: 'Seperti tahu, ini berukuran setengah dari holland',
+            },
+            {
+              id: 10,
+              kode: 'jlc',
+              name: 'Kanstin Lock',
+              image: 'jlc.png',
+              mutu: '-',
+              measure: 'pcs',
+              set: 1,
+              dimension: '40x20x10cm',
+              desc: 'Pembatas yg saling mengunci',
+            },
+            {
+              id: 11,
+              kode: 'K13',
+              name: 'Uskup 6 cm',
+              image: 'k13.png',
+              mutu: '-',
+              measure: 'pcs',
+              set: 1,
+              dimension: '-',
+              desc: 'Topi pengunci paving',
+            },
+          ],
+
+          // projects: [
+          //   {
+          //     id: 1,
+          //     name: 'Proyek 1',
+          //     location: 'Sukoharjo',
+          //     desc: 'Dengan motif paving zig-zag memberikan efek asri seperti tujuan hidup yang pastinya melewati alur yg hampir tidak mungkin tidak lurus-lurus saja.',
+          //     time: new Date().toLocaleTimeString(),
+          //   },
+          //   {
+          //     id: 2,
+          //     name: 'Proyek 2',
+          //     location: 'Wonogiri',
+          //     desc: 'Dengan motif paving zig-zag memberikan efek asri seperti tujuan hidup yang pastinya melewati alur yg hampir tidak mungkin tidak lurus-lurus saja.',
+          //     time: new Date().toLocaleTimeString(),
+          //   },
+          //   {
+          //     id: 3,
+          //     name: 'Proyek 3',
+          //     location: 'Surakarta',
+          //     desc: 'Dengan motif paving zig-zag memberikan efek asri seperti tujuan hidup yang pastinya melewati alur yg hampir tidak mungkin tidak lurus-lurus saja.',
+          //     time: new Date().toLocaleTimeString(),
+          //   },
+          //   {
+          //     id: 4,
+          //     name: 'Proyek 4',
+          //     location: 'Boyolali',
+          //     desc: 'Dengan motif paving zig-zag memberikan efek asri seperti tujuan hidup yang pastinya melewati alur yg hampir tidak mungkin tidak lurus-lurus saja.',
+          //     time: new Date().toLocaleTimeString(),
+          //   },
+          //   {
+          //     id: 5,
+          //     name: 'Proyek 5',
+          //     location: 'Jepara',
+          //     desc: 'Dengan motif paving zig-zag memberikan efek asri seperti tujuan hidup yang pastinya melewati alur yg hampir tidak mungkin tidak lurus-lurus saja.',
+          //     time: new Date().toLocaleTimeString(),
+          //   },
+          //   {
+          //     id: 6,
+          //     name: 'Proyek 6',
+          //     location: 'Semarang',
+          //     desc: 'Dengan motif paving zig-zag memberikan efek asri seperti tujuan hidup yang pastinya melewati alur yg hampir tidak mungkin tidak lurus-lurus saja.',
+          //     time: new Date().toLocaleTimeString(),
+          //   },
+          // ],
+
+          errors: {},
+          submit() {
+            //console.log(this.username, this.password, this.confirm_password, this.bio);
+            if (this.username.length < 3) {
+              this.errors.username = 'Minimal 3 karakter!';
+            }
+
+            if (this.password.length < 5) {
+              this.errors.password = 'Minimal 5 karakter!';
+            }
+
+            if (this.confirm_password !== this.password) {
+              this.errors.confirm_password = 'Password konfirmasi harus sama dengan password!';
+            }
+
+            if (!this.bio) {
+              this.errors.bio = 'Ceritakan tentang dirimu!';
+            }
+
+            if (Object.keys(this.errors)) console.log(this.errors);
+          },
+
+          getProductDetail(id) {
+            this.show_product_detail = true;
+            let data = this.products.filter((item, index) => item.id === id);
+            this.data_product_detail = data;
+          },
+        }));
+      });
+
+      // Animate on Scroll
+      AOS.init({
+        duration: 500,
+        once: true,
+        mirror: true,
+      });
+    </script>
+  </body>
+</html>
