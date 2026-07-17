@@ -198,9 +198,17 @@
                   strings: ['<span class="text-emerald-500">C</span>AHAYA <span class="text-emerald-500">P</span>AVING'],
                   typeSpeed: 10,
                   showCursor: false,
+                  onComplete(y) {
+                    new Typed('#type', {
+                      strings: ['<span class="text-emerald-500">C</span>ahaya <span class="text-emerald-500">P</span>aving'],
+                      typeSpeed: 70,
+                      showCursor: false,
+                    });
+                  },
                 });
               },
             });
+
             new Typed('#type_2', {
               strings: ['Melayani sepenuh hati.'],
               typeSpeed: 50,
