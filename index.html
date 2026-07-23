@@ -125,14 +125,14 @@
         <nav class="flex gap-2 text-slate-100">
           <a href="#" class="text-xs transition hover:underline hover:text-slate-200 cursor-pointer">instagram</a>
           <a href="#" class="text-xs transition hover:underline hover:text-slate-200 cursor-pointer">facebook</a>
-          <a href="https://wa.me/6285701111799?text=Hai, mau tanya info pavingnya nih!" class="text-xs transition hover:underline hover:text-slate-200 cursor-pointer">whatsapp</a>
+          <a href="https://wa.me/6281910284113?text=Hai, mau tanya info pavingnya nih!" class="text-xs transition hover:underline hover:text-slate-200 cursor-pointer">whatsapp</a>
         </nav>
       </div>
     </footer>
 
     <!-- Absolute element -->
     <div class="fixed right-10 bottom-10 z-3">
-      <a href="https://wa.me/6285701111799?text=Hai, mau tanya info pavingnya nih!" title="Kirimkan pesan atau tanya-tanya langsung.">
+      <a href="https://wa.me/6281910284113?text=Hai, mau tanya info pavingnya nih!" title="Kirimkan pesan atau tanya-tanya langsung.">
         <img src="icons/whatsapp.png" class="size-10 transition hover:brightness-110 animate-bounce" />
       </a>
     </div>
@@ -157,7 +157,7 @@
                 </template>
               </p>
               <p class="text-md text-slate-400">
-                <template x-if="data_product_detail[0].measure != 'pcs'">
+                <template x-if="data_product_detail[0].measure != 'pcs' && data_product_detail[0].measure != 'm3'">
                   <div class="flex gap-2">
                     <p x-text="data_product_detail[0].set"></p>
                     <p>pcs (m2)</p>
@@ -171,7 +171,7 @@
 
           <div class="btns flex justify-end m-2">
             <a
-              :href="'https://wa.me/6285701111799?text=Hai, aku mau beli '+ data_product_detail[0].name +' ya!\n\nKebutuhan: ___ (m2/pcs)\nAlamat pengiriman: ___\nUntuk: ___\nTerima kasih.'"
+              :href="'https://wa.me/6281910284113?text=Hai, aku mau beli '+ data_product_detail[0].name +' ya!\n\nKebutuhan: ___ (m2/pcs)\nAlamat pengiriman: ___\nUntuk: ___\nTerima kasih.'"
               title="Beli atau tanya-tanya langsung."
               class="relative z-2 rounded-md bg-emerald-500 transition hover:bg-emerald-600 cursor-pointer text-white px-2 py-1 flex self-end"
               >Beli</a
@@ -193,6 +193,7 @@
               strings: ['<span class="text-emerald-500">C</span>ahaya <span class="text-emerald-500">P</span>aving'],
               typeSpeed: 100,
               showCursor: false,
+              // loop: true, // looping
               onComplete(x) {
                 new Typed('#type', {
                   strings: ['<span class="text-emerald-500">C</span>AHAYA <span class="text-emerald-500">P</span>AVING'],
@@ -207,8 +208,12 @@
                   },
                 });
               },
+              // onStringTyped(ar, pos) {
+              //   console.log(ar, pos);
+              // },
+              // attr: 'type here...',
+              // cursorChar: '>',
             });
-
             new Typed('#type_2', {
               strings: ['Melayani sepenuh hati.'],
               typeSpeed: 50,
@@ -550,6 +555,28 @@
               set: 1,
               dimension: '-',
               desc: 'Topi pengunci paving',
+            },
+            {
+              id: 12,
+              kode: 'Roster',
+              name: 'Roster',
+              image: 'roster.jpg',
+              mutu: '-',
+              measure: 'pcs',
+              set: 1,
+              dimension: '-',
+              desc: 'Ruangan mempunyai sirkulasi udara yg bagus',
+            },
+            {
+              id: 13,
+              kode: 'psr',
+              name: 'Pasir',
+              image: 'psr.jpg',
+              mutu: '-',
+              measure: 'm3',
+              set: 1,
+              dimension: '-',
+              desc: 'Bangun membangun dengan pasir pilihan',
             },
           ],
 
